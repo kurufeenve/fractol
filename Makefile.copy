@@ -1,0 +1,56 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/04/26 17:16:22 by vordynsk          #+#    #+#              #
+#    Updated: 2018/04/26 17:16:24 by vordynsk         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	= fractol
+
+HEADER	= fractol.h
+
+SRCDIR	= src
+
+SRC		= main.c test.c
+
+SRCP	= $(addprefix $(SRCDIR)/,$(SRC))
+
+OBJDIR	= obj
+
+OBJ		= $(patsubst %.c, %.o, $(SRC))
+
+OBJP	= $(addprefix $(OBJDIR)/,$(OBJ))
+
+CC		= gcc
+
+LIBPATH	= -C libft/
+
+LIBRARY	= libft/libft.a
+
+FLAGS	= -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
+
+all: $(NAME)
+
+$(NAME): objfiles
+	$(CC) $(FLAGS) -o $(NAME) $(SRCP) -I $(HEADER) libft/libft.a
+
+objfiles:
+	sh lib.sh
+	sh dir.sh
+
+$(SRCDIR)/%.c: $(OBJDIR)/%.o
+	$(CC) -c $(SRCP) -o $(OBJP) -I $(LIBRARY)
+
+clean:
+	$(MAKE) clean $(LIBPATH)
+	rm -rf $(OBJDIR)
+
+fclean: clean
+	rm -rf $(NAME) $(LIBRARY)
+
+re: fclean all
