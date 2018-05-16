@@ -14,7 +14,7 @@ NAME = fractol
 
 HEADER = fractol.h
 
-SRC = main.c fractals.c
+SRC = main.c fractals.c screen_stuff.c
 
 SRCDIR = src
 
@@ -32,7 +32,7 @@ LIBPATH = -C libft/
 
 LIBRARY = libft/libft.a
 
-FLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
+FLAGS = -g -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

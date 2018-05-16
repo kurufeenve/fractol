@@ -28,5 +28,6 @@ void	ft_screen_stuff(t_general *g)
 {
 	ft_clearscr(g);
 	mlx_clear_window(g->init, g->win);
-	
+	calc(g, mandelbrot);
+	mlx_put_image_to_window(g->init, g->win, g->img, 0, 0);
 }

@@ -25,11 +25,11 @@ int		main(int argc, char **argv)
 	g.size_y = 1000;
 	map(&g);
 	g.p = 0;
-	while (g.p < g.n)
-	{
-		printf("index = %d, x = %f, y = %f, z = %f, color = %x\n", g.p, g.points[g.p].x, g.points[g.p].y, g.points[g.p].z, g.points[g.p].color.color);
-		g.p++;
-	}
+	// while (g.p < g.n)
+	// {
+	// 	printf("index = %d, x = %f, y = %f, z = %f, color = %x\n", g.p, g.points[g.p].x, g.points[g.p].y, g.points[g.p].z, g.points[g.p].color.color);
+	// 	g.p++;
+	// }
 	if ((g.init = mlx_init()) == NULL ||
 		(g.win = mlx_new_window(g.init,
 		g.size_x, g.size_y, "test")) == NULL || (g.img =
@@ -37,6 +37,7 @@ int		main(int argc, char **argv)
 		(g.image = mlx_get_data_addr(g.img, &g.bpp, &g.val,
 		&g.ed)) == NULL)
 		return (0);
+	ft_screen_stuff(&g);
 	mlx_hook(g.win, 2, 5, key_hook, &g);
 	mlx_hook(g.win, 17, 1L << 17, exit_x, NULL);
 	mlx_loop(g.init);
@@ -66,6 +67,8 @@ int		key_hook(int key, void *ptr)
 		system("leaks fractol");
 		exit(0);
 	}
+	// if (key == 18)
+	// 	ft_screen_stuff(g);
 	return (0);
 }
 

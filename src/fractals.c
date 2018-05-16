@@ -12,26 +12,23 @@
 
 #include "../fractol.h"
 
-void    mandelbrot(t_general *g)
+void    calc(t_general *g, void (*fractal)(t_general *))
 {
-	g->f.iter = 200;
+	g->f.iter = 255;
 	g->j = 0;
 	g->p = 0;
-	while (g->j < g->size_y)
+	while (g->p < g->size_y * g->size_x)
 	{
-		g->i = 0;
-		while (g->i < g->size_x)
-		{
-			calc(g);
-			g->i++;
-			g->p++;
-		}
-		g->j++;
+		fractal(g);
+		g->p++;
 	}
 }
 
-void	calc(t_general *g)
+void	mandelbrot(t_general *g)
 {
+	g->f.zoom = 1;
+	g->f.moX = -0.5;
+	g->f.moY = 0;
 	g->f.cr = 1.5 * (g->i - g->size_x / 2) / \
 	(g->size_x / 2 * g->f.zoom) + g->f.moX;
 	g->f.ci = (g->j - g->size_y / 2) / (g->size_y / 2 * g->f.zoom);
@@ -42,14 +39,14 @@ void	calc(t_general *g)
 		g->f.oi = g->f.ni;
 		g->f.nr = g->f.or * g->f.or - g->f.oi * g->f.oi + g->f.cr;
 		g->f.ni = 2 * g->f.or * g->f.oi + g->f.ci;
+		printf("nr %f ni %f\n", g->f.nr, g->f.ni);
 		if (g->f.nr * g->f.nr + g->f.ni * g->f.ni > 4)
 			break ;
 		g->n++;
 	}
-	g->f.col = 255 - 255 / g->n;
-	if (g->n == g->f.iter)
-		g->f.col = 0;
-	g->points[g->p].color.channel[0] = g->f.col;
-	g->points[g->p].color.channel[1] = g->f.col;
-	g->points[g->p].color.channel[2] = g->f.col;
+	g->points[g->p].color.channel[0] = g->n * (g->n < g->f.iter);
+	g->points[g->p].color.channel[1] = g->n;
+	g->points[g->p].color.channel[2] = g->n;
+	printf("\n\n\ng->n = %d, x = %f, y = %f\n", g->n, g->points[g->p].x, g->points[g->p].y);
+	put_pixel(g, g->points[g->p].x, g->points[g->p].y, g->points[g->p].color);
 }

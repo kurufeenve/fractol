@@ -74,7 +74,8 @@ int					exit_x(void);
 int					key_hook(int key, void *ptr);
 void				put_pixel(t_general *g, int x, int y, t_color color);
 void				map(t_general *g);
-void				calc(t_general *g);
+void				calc(t_general *g, void fractal(t_general *g));
+void				mandelbrot(t_general *g);
 void				ft_clearscr(t_general *gen);
 void				ft_screen_stuff(t_general *g);
 
