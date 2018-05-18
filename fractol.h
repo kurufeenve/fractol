@@ -67,6 +67,7 @@ typedef struct		s_general
 	int				j;
 	int				n;
 	int				p;
+	int				fr_num;
 	t_fractal		f;
 }               	t_general;
 
@@ -78,6 +79,7 @@ void				calc(t_general *g, void fractal(t_general *g));
 void				mandelbrot(t_general *g);
 void				ft_clearscr(t_general *gen);
 void				ft_screen_stuff(t_general *g);
+void				ft_compare(t_general *g, char *fr_str);
 
 #endif
 

@@ -16,20 +16,14 @@ int		main(int argc, char **argv)
 {
 	t_general	g;
 
-	// if (argc != 2)
-	// {
-	// 	ft_putstr("map error\n");
-	// 	return (0);
-	// }
-	g.size_x = 1000;
-	g.size_y = 1000;
+	if (argc != 2)
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
+	ft_compare(&g, argv[1]);
 	map(&g);
 	g.p = 0;
-	// while (g.p < g.n)
-	// {
-	// 	printf("index = %d, x = %f, y = %f, z = %f, color = %x\n", g.p, g.points[g.p].x, g.points[g.p].y, g.points[g.p].z, g.points[g.p].color.color);
-	// 	g.p++;
-	// }
 	if ((g.init = mlx_init()) == NULL ||
 		(g.win = mlx_new_window(g.init,
 		g.size_x, g.size_y, "test")) == NULL || (g.img =
