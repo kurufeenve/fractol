@@ -30,6 +30,8 @@ void	ft_screen_stuff(t_general *g)
 	mlx_clear_window(g->init, g->win);
 	if (g->fr_num == 1)
 		calc(g, mandelbrot);
+	if (g->fr_num == 1)
+		calc(g, julia);
 	mlx_put_image_to_window(g->init, g->win, g->img, 300, 0);
 }
 
@@ -48,8 +50,12 @@ void	ft_compare(t_general *g, char *fr_str)
 		g->size_x = 2000;
 		g->size_y = 1400;
 	}
-	else if (ft_strcmp(jul, fr_str) == 1)
+	else if (ft_strcmp(jul, fr_str) == 0)
+	{
 		g->fr_num = 2;
+		g->size_x = 1000;
+		g->size_y = 1000;
+	}
 	ft_strdel(&mand);
 	ft_strdel(&jul);
 }
