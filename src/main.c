@@ -33,7 +33,7 @@ int		main(int argc, char **argv)
 		return (0);
 	ft_screen_stuff(&g);
 	mlx_hook(g.win, 2, 5, key_hook, &g);
-	mlx_hook(g.win, 6, 1L << 6, mouse_pos, &g);
+	mlx_hook(g.win, 6, 0, mouse_pos, &g);
 	mlx_hook(g.win, 17, 1L << 17, exit_x, NULL);
 	mlx_loop(g.init);
     return (0);

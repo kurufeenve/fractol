@@ -47,11 +47,11 @@ void	mandelbrot(t_general *g)
 			break ;
 		g->n++;
 	}
-	ft_color(g);
-	// g->points[g->p].color.channel[0] = 255 * g->n/g->f.iter + 30 * g->n/g->f.iter;
-	// g->points[g->p].color.channel[1] = 255 * g->n/g->f.iter + 20 * g->n/g->f.iter;
-	// g->points[g->p].color.channel[2] = 255 * g->n/g->f.iter + 10 * g->n/g->f.iter;
-	// g->n == g->f.iter ? g->points[g->p].color.color = 0 : 1;
+	//ft_color(g);
+	g->points[g->p].color.channel[0] = 255 * g->n/g->f.iter + 30;
+	g->points[g->p].color.channel[1] = 255 * g->n/g->f.iter + 20;
+	g->points[g->p].color.channel[2] = 255 * g->n/g->f.iter + 10;
+	g->n == g->f.iter ? g->points[g->p].color.color = 0 : 1;
 	//printf("red = %d, green = %d, blue = %d, n = %d, iter = %d, color = %d, bul = %d\n", g->points[g->p].color.channel[0], g->points[g->p].color.channel[1], g->points[g->p].color.channel[2], g->n, g->f.iter, 255 * (g->n / g->f.iter), (int)(g->n < g->f.iter));
 	put_pixel(g, g->points[g->p].x, g->points[g->p].y, g->points[g->p].color);
 }
@@ -107,3 +107,5 @@ void	ft_color(t_general *g)
 	else
 		g->points[g->p].color.color = 0;
 }
+
+void	burn
