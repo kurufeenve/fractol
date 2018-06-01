@@ -16,23 +16,24 @@ int		main(int argc, char **argv)
 {
 	t_general	g;
 
-	if (argc != 2)
+	if (argc != 2 || ft_compare(&g, argv[1]) == 0)
 	{
-		ft_putstr("error\n");
+		ft_putstr("error\nMandelbrot\tJulia\n");
+		system("leaks fractol");
 		return (0);
 	}
-	ft_compare(&g, argv[1]);
 	map(&g);
 	g.p = 0;
 	if ((g.init = mlx_init()) == NULL ||
 		(g.win = mlx_new_window(g.init,
-		g.size_x, g.size_y, "test")) == NULL || (g.img =
+		g.size_x, g.size_y, argv[1])) == NULL || (g.img =
 		mlx_new_image(g.init, g.size_x, g.size_y)) == NULL ||
 		(g.image = mlx_get_data_addr(g.img, &g.bpp, &g.val,
 		&g.ed)) == NULL)
 		return (0);
 	ft_screen_stuff(&g);
 	mlx_hook(g.win, 2, 5, key_hook, &g);
+	mlx_hook(g.win, 6, 1L << 6, mouse_pos, &g);
 	mlx_hook(g.win, 17, 1L << 17, exit_x, NULL);
 	mlx_loop(g.init);
     return (0);
@@ -61,8 +62,6 @@ int		key_hook(int key, void *ptr)
 		system("leaks fractol");
 		exit(0);
 	}
-	// if (key == 18)
-	// 	ft_screen_stuff(g);
 	return (0);
 }
 

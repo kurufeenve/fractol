@@ -30,32 +30,44 @@ void	ft_screen_stuff(t_general *g)
 	mlx_clear_window(g->init, g->win);
 	if (g->fr_num == 1)
 		calc(g, mandelbrot);
-	if (g->fr_num == 1)
+	if (g->fr_num == 2)
 		calc(g, julia);
-	mlx_put_image_to_window(g->init, g->win, g->img, 300, 0);
+	mlx_put_image_to_window(g->init, g->win, g->img, 0, 0);
 }
 
-void	ft_compare(t_general *g, char *fr_str)
+int		mouse_pos(int x, int y, t_general *g)
 {
-	char	*mand;
-	char	*jul;
-	
-	mand = ft_strnew(10);
-	jul = ft_strnew(5);
-	mand = ft_strcpy(mand, "Mandelbrot");
-	jul = ft_strcpy(jul, "Julia");
-	if (ft_strcmp(mand, fr_str) == 0)
+	g->mouse_x = x;
+	g->mouse_y = y;
+	if (g->fr_num == 2)
+	{
+		g->f.cr = -0.7 + g->mouse_x/1000;
+		g->f.ci = 0.27015 + g->mouse_y/1000;
+	}
+	printf("g->f.cr = %f, g->f.ci = %f, x = %d, y = %d\n", g->f.cr, g->f.ci, x, y);
+	ft_screen_stuff(g);
+	return (0);
+}
+
+int		ft_compare(t_general *g, char *fr_str)
+{
+	g->mand = ft_strnew(10);
+	g->jul = ft_strnew(5);
+	g->mand = ft_strcpy(g->mand, "Mandelbrot");
+	g->jul = ft_strcpy(g->jul, "Julia");
+	if (ft_strcmp(g->mand, fr_str) == 0)
 	{	
 		g->fr_num = 1;
 		g->size_x = 2000;
 		g->size_y = 1400;
 	}
-	else if (ft_strcmp(jul, fr_str) == 0)
+	else if (ft_strcmp(g->jul, fr_str) == 0)
 	{
 		g->fr_num = 2;
 		g->size_x = 1000;
 		g->size_y = 1000;
 	}
-	ft_strdel(&mand);
-	ft_strdel(&jul);
+	else
+		return (0);
+	return (1);
 }

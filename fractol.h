@@ -47,7 +47,6 @@ typedef struct		s_fractal
 	double			moX;
 	double			moY;
 	int				iter;
-	int				col;
 }					t_fractal;
 
 typedef struct		s_general
@@ -69,6 +68,11 @@ typedef struct		s_general
 	int				p;
 	int				fr_num;
 	t_fractal		f;
+	char			*mand;
+	char			*jul;
+	float			mouse_x;
+	float			mouse_y;
+	float			for_color;
 }               	t_general;
 
 int					exit_x(void);
@@ -80,7 +84,9 @@ void				mandelbrot(t_general *g);
 void				julia(t_general *g);
 void				ft_clearscr(t_general *gen);
 void				ft_screen_stuff(t_general *g);
-void				ft_compare(t_general *g, char *fr_str);
+int					ft_compare(t_general *g, char *fr_str);
+int					mouse_pos(int x, int y, t_general *g);
+void				ft_color(t_general *g);
 
 #endif
 
