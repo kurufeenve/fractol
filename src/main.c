@@ -30,12 +30,10 @@ int		main(int argc, char **argv)
 		(g.image = mlx_get_data_addr(g.img, &g.bpp, &g.val,
 		&g.ed)) == NULL)
 		return (0);
-	g.f.zoom = 1;
-	g.f.moX = 0;
-	g.f.moY = 0;
 	ft_screen_stuff(&g);
 	mlx_hook(g.win, 2, 5, key_hook, &g);
 	mlx_hook(g.win, 6, 0, mouse_pos, &g);
+	mlx_mouse_hook(g.win, ft_zoom, &g);
 	mlx_hook(g.win, 17, 1L << 17, exit_x, NULL);
 	mlx_loop(g.init);
     return (0);

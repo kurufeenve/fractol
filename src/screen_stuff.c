@@ -29,10 +29,7 @@ void	ft_screen_stuff(t_general *g)
 	ft_clearscr(g);
 	mlx_clear_window(g->init, g->win);
 	if (g->fr_num == 1)
-	{
-		g->f.moX = -0.5;
 		calc(g, mandelbrot);
-	}
 	if (g->fr_num == 2)
 		calc(g, julia);
 	mlx_put_image_to_window(g->init, g->win, g->img, 0, 0);
@@ -63,14 +60,21 @@ int		ft_compare(t_general *g, char *fr_str)
 		g->fr_num = 1;
 		g->size_x = 2000;
 		g->size_y = 1400;
+		g->f.zoom = 0.8;
+		g->f.moX = -0.7;
+		g->f.moY = 0;
 	}
 	else if (ft_strcmp(g->jul, fr_str) == 0)
 	{
 		g->fr_num = 2;
 		g->size_x = 1000;
 		g->size_y = 1000;
+		g->f.zoom = 1;
+		g->f.moX = 0;
+		g->f.moY = 0;
 	}
 	else
 		return (0);
+	//printf("movex = %f, movey = %f, zoom = %f\n", g->f.moX, g->f.moY, g->f.zoom);
 	return (1);
 }

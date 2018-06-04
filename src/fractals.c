@@ -17,6 +17,7 @@ void    calc(t_general *g, void (*fractal)(t_general *))
 	g->f.iter = 100;
 	g->j = 0;
 	g->p = 0;
+	// printf("movex = %f, movey = %f, zoom = %f\n", g->f.moX, g->f.moY, g->f.zoom);
 	while (g->p < g->size_y * g->size_x)
 	{
 		fractal(g);
@@ -30,7 +31,8 @@ void	mandelbrot(t_general *g)
 	g->f.ni = 0;
 	g->f.cr = 1.5 * (g->points[g->p].x - g->size_x / 2) / \
 	(g->size_x / 2 * g->f.zoom) + g->f.moX;
-	g->f.ci = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom);
+	g->f.ci = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom)\
+	+ g->f.moY;
 	g->n = 0;
 	//printf("nr = %f, ni = %f, or = %f, oi = %f, cr = %f, ci = %f, zoom = %f, moX = %f, moY = %f, iter = %d\n", g->f.nr, g->f.ni, g->f.or, g->f.oi, g->f.cr, g->f.ci, g->f.zoom, g->f.moX, g->f.moY, g->f.iter);
 	while (g->n < g->f.iter)
@@ -57,9 +59,8 @@ void	julia(t_general *g)
 {
 	g->f.nr = 1.5 * (g->points[g->p].x - g->size_x / 2) / \
 	(g->size_x / 2 * g->f.zoom) + g->f.moX;
-	g->f.ni = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom);
-	//g->f.cr = -0.7;
-	//g->f.ci = 0.27015;
+	g->f.ni = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom)\
+	+ g->f.moY;
 	g->n = 0;
 	while (g->n < g->f.iter)
 	{
@@ -72,7 +73,6 @@ void	julia(t_general *g)
 		g->n++;
 	}
 	ft_color(g);
-	//g->points[g->p].color.color = 16581375 * (g->n / g->f.iter);
 	//printf("color = %d, n = %d, iter = %d, color = %d\n", g->points[g->p].color.color, g->n, g->f.iter, (g->n / g->f.iter));
 	put_pixel(g, g->points[g->p].x, g->points[g->p].y, g->points[g->p].color);
 }

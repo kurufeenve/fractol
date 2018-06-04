@@ -88,6 +88,7 @@ int					ft_compare(t_general *g, char *fr_str);
 int					mouse_pos(int x, int y, t_general *g);
 void				ft_color(t_general *g);
 void				ft_move(t_general *g, int key);
+int					ft_zoom(int mouse_but, int x, int y, t_general *g);
 
 #endif
 
