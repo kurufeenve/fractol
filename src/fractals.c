@@ -102,4 +102,20 @@ void	ft_color(t_general *g)
 		g->points[g->p].color.color = 0;
 }
 
-//void	burn
+void	burning(t_general *g)
+{
+	double	x;
+	double	y;
+	double	scale_x;
+	double	scale_y;
+
+	scale_x = 3.5 / g->size_x;
+	scale_y = 2 / g->size_y;
+	g->p = 0;
+	while (hypot(g->f.nr, g->f.ni) < 4 && g->p < g->size_x * g->size_y)
+	{
+		g->f.nr = 
+		g->f.or = g->f.nr;
+		g->p++;
+	}
+}
