@@ -29,7 +29,10 @@ void	ft_screen_stuff(t_general *g)
 	ft_clearscr(g);
 	mlx_clear_window(g->init, g->win);
 	if (g->fr_num == 1)
+	{
+		g->f.moX = -0.5;
 		calc(g, mandelbrot);
+	}
 	if (g->fr_num == 2)
 		calc(g, julia);
 	mlx_put_image_to_window(g->init, g->win, g->img, 0, 0);
@@ -44,7 +47,7 @@ int		mouse_pos(int x, int y, t_general *g)
 		g->f.cr = -0.7 + g->mouse_x/1000;
 		g->f.ci = 0.27015 + g->mouse_y/1000;
 	}
-	printf("g->f.cr = %f, g->f.ci = %f, x = %d, y = %d\n", g->f.cr, g->f.ci, x, y);
+	//printf("g->f.cr = %f, g->f.ci = %f, x = %d, y = %d\n", g->f.cr, g->f.ci, x, y);
 	ft_screen_stuff(g);
 	return (0);
 }

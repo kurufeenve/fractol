@@ -23,7 +23,6 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	map(&g);
-	g.p = 0;
 	if ((g.init = mlx_init()) == NULL ||
 		(g.win = mlx_new_window(g.init,
 		g.size_x, g.size_y, argv[1])) == NULL || (g.img =
@@ -31,6 +30,9 @@ int		main(int argc, char **argv)
 		(g.image = mlx_get_data_addr(g.img, &g.bpp, &g.val,
 		&g.ed)) == NULL)
 		return (0);
+	g.f.zoom = 1;
+	g.f.moX = 0;
+	g.f.moY = 0;
 	ft_screen_stuff(&g);
 	mlx_hook(g.win, 2, 5, key_hook, &g);
 	mlx_hook(g.win, 6, 0, mouse_pos, &g);
@@ -62,6 +64,8 @@ int		key_hook(int key, void *ptr)
 		system("leaks fractol");
 		exit(0);
 	}
+	else if (key > 122 && key < 127)
+		ft_move(g, key);
 	return (0);
 }
 

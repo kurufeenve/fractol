@@ -14,7 +14,7 @@ NAME = fractol
 
 HEADER = fractol.h
 
-SRC = main.c fractals.c screen_stuff.c
+SRC = main.c fractals.c screen_stuff.c stuff.c
 
 SRCDIR = src
 

@@ -26,9 +26,6 @@ void    calc(t_general *g, void (*fractal)(t_general *))
 
 void	mandelbrot(t_general *g)
 {
-	g->f.zoom = 1;
-	g->f.moX = 0;
-	g->f.moY = 0;
 	g->f.nr = 0;
 	g->f.ni = 0;
 	g->f.cr = 1.5 * (g->points[g->p].x - g->size_x / 2) / \
@@ -58,9 +55,6 @@ void	mandelbrot(t_general *g)
 
 void	julia(t_general *g)
 {
-	g->f.zoom = 1;
-	g->f.moX = 0;
-	g->f.moY = 0;
 	g->f.nr = 1.5 * (g->points[g->p].x - g->size_x / 2) / \
 	(g->size_x / 2 * g->f.zoom) + g->f.moX;
 	g->f.ni = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom);
@@ -108,4 +102,4 @@ void	ft_color(t_general *g)
 		g->points[g->p].color.color = 0;
 }
 
-void	burn
+//void	burn
