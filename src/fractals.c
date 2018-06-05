@@ -17,7 +17,11 @@ void    calc(t_general *g, void (*fractal)(t_general *))
 	g->f.iter = 100;
 	g->j = 0;
 	g->p = 0;
-	// printf("movex = %f, movey = %f, zoom = %f\n", g->f.moX, g->f.moY, g->f.zoom);
+	if (g->fr_num == 3)
+	{
+		g->f.scale_x = 3.5 / g->size_x;
+		g->f.scale_y = 2.0 / g->size_y;
+	}
 	while (g->p < g->size_y * g->size_x)
 	{
 		fractal(g);
@@ -104,18 +108,25 @@ void	ft_color(t_general *g)
 
 void	burning(t_general *g)
 {
-	double	x;
-	double	y;
-	double	scale_x;
-	double	scale_y;
-
-	scale_x = 3.5 / g->size_x;
-	scale_y = 2 / g->size_y;
-	g->p = 0;
-	while (hypot(g->f.nr, g->f.ni) < 4 && g->p < g->size_x * g->size_y)
+	g->n = 0;
+	g->f.cr = 1.5 * (g->points[g->p].x - g->size_x / 2) / \
+	(g->size_x / 2 * g->f.zoom) + g->f.moX;
+	g->f.ci = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom)\
+	+ g->f.moY;
+	g->f.nr = -2.5 + g->points[g->p].x * g->f.scale_x;
+	g->f.ni = -1 + g->points[g->p].y * g->f.scale_y;
+	//printf("size_x = %d, size_y = %d, scale_x = %f, scale_y = %f, points.x = %f, points.y = %f, nr = %f, ni = %f\n", g->size_x, g->size_y, g->f.scale_x, g->f.scale_y, g->points[g->p].x, g->points[g->p].y, g->f.nr, g->f.ni);
+	while (hypot(g->f.nr, g->f.ni) < 4 && g->n < g->f.iter)
 	{
-		g->f.nr = 
 		g->f.or = g->f.nr;
-		g->p++;
+		g->f.oi = g->f.ni;
+		g->f.nr = fabs(pow(g->f.or, 2) - pow(g->f.oi, 2) + g->f.or) + g->f.cr;
+		g->f.ni = fabs(2 * g->f.or * g->f.oi) + g->f.ci;
+		g->n++;
 	}
+	g->points[g->p].color.channel[2] = 255 * (double)g->n / g->f.iter;
+	g->points[g->p].color.channel[1] = 255 * (double)g->n / g->f.iter;
+	g->points[g->p].color.channel[0] = 255 * (double)g->n / g->f.iter;
+	//printf("g->n = %d, g->points[g->p].color.channel[0] = %d\n", g->n, g->points[g->p].color.channel[0]);
+	put_pixel(g, g->points[g->p].x, g->points[g->p].y, g->points[g->p].color);
 }

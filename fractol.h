@@ -47,6 +47,8 @@ typedef struct		s_fractal
 	double			moX;
 	double			moY;
 	int				iter;
+	double			scale_x;
+	double			scale_y;
 }					t_fractal;
 
 typedef struct		s_general
@@ -70,6 +72,7 @@ typedef struct		s_general
 	t_fractal		f;
 	char			*mand;
 	char			*jul;
+	char			*burn;
 	double			mouse_x;
 	double			mouse_y;
 	double			for_color;
@@ -82,6 +85,7 @@ void				map(t_general *g);
 void				calc(t_general *g, void fractal(t_general *g));
 void				mandelbrot(t_general *g);
 void				julia(t_general *g);
+void				burning(t_general *g);
 void				ft_clearscr(t_general *gen);
 void				ft_screen_stuff(t_general *g);
 int					ft_compare(t_general *g, char *fr_str);

@@ -32,6 +32,8 @@ void	ft_screen_stuff(t_general *g)
 		calc(g, mandelbrot);
 	if (g->fr_num == 2)
 		calc(g, julia);
+	if (g->fr_num == 3)
+		calc(g, burning);
 	mlx_put_image_to_window(g->init, g->win, g->img, 0, 0);
 }
 
@@ -53,8 +55,10 @@ int		ft_compare(t_general *g, char *fr_str)
 {
 	g->mand = ft_strnew(10);
 	g->jul = ft_strnew(5);
+	g->burn = ft_strnew(4);
 	g->mand = ft_strcpy(g->mand, "Mandelbrot");
 	g->jul = ft_strcpy(g->jul, "Julia");
+	g->burn = ft_strcpy(g->burn, "Burn");
 	if (ft_strcmp(g->mand, fr_str) == 0)
 	{	
 		g->fr_num = 1;
@@ -67,6 +71,15 @@ int		ft_compare(t_general *g, char *fr_str)
 	else if (ft_strcmp(g->jul, fr_str) == 0)
 	{
 		g->fr_num = 2;
+		g->size_x = 1000;
+		g->size_y = 1000;
+		g->f.zoom = 1;
+		g->f.moX = 0;
+		g->f.moY = 0;
+	}
+	else if (ft_strcmp(g->burn, fr_str) == 0)
+	{
+		g->fr_num = 3;
 		g->size_x = 1000;
 		g->size_y = 1000;
 		g->f.zoom = 1;
