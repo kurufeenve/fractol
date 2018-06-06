@@ -112,21 +112,19 @@ void	burning(t_general *g)
 	g->f.cr = 1.5 * (g->points[g->p].x - g->size_x / 2) / \
 	(g->size_x / 2 * g->f.zoom) + g->f.moX;
 	g->f.ci = (g->points[g->p].y - g->size_y / 2) / (g->size_y / 2 * g->f.zoom)\
-	+ g->f.moY;
-	g->f.nr = -2.5 + g->points[g->p].x * g->f.scale_x;
-	g->f.ni = -1 + g->points[g->p].y * g->f.scale_y;
+	+ g->f.moY - 0.5;
+	g->f.nr = 0;
+	g->f.ni = 0;
 	//printf("size_x = %d, size_y = %d, scale_x = %f, scale_y = %f, points.x = %f, points.y = %f, nr = %f, ni = %f\n", g->size_x, g->size_y, g->f.scale_x, g->f.scale_y, g->points[g->p].x, g->points[g->p].y, g->f.nr, g->f.ni);
 	while (hypot(g->f.nr, g->f.ni) < 4 && g->n < g->f.iter)
 	{
 		g->f.or = g->f.nr;
 		g->f.oi = g->f.ni;
-		g->f.nr = fabs(pow(g->f.or, 2) - pow(g->f.oi, 2) + g->f.or) + g->f.cr;
-		g->f.ni = fabs(2 * g->f.or * g->f.oi) + g->f.ci;
+		g->f.nr = fabs(g->f.or) * fabs(g->f.or) - fabs(g->f.oi) * fabs(g->f.oi) + g->f.cr;
+		g->f.ni = 2 * fabs(g->f.or) * fabs(g->f.oi) + g->f.ci;
 		g->n++;
 	}
-	g->points[g->p].color.channel[2] = 255 * (double)g->n / g->f.iter;
-	g->points[g->p].color.channel[1] = 255 * (double)g->n / g->f.iter;
-	g->points[g->p].color.channel[0] = 255 * (double)g->n / g->f.iter;
+	ft_color(g);
 	//printf("g->n = %d, g->points[g->p].color.channel[0] = %d\n", g->n, g->points[g->p].color.channel[0]);
 	put_pixel(g, g->points[g->p].x, g->points[g->p].y, g->points[g->p].color);
 }

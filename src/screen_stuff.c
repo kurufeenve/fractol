@@ -60,34 +60,43 @@ int		ft_compare(t_general *g, char *fr_str)
 	g->jul = ft_strcpy(g->jul, "Julia");
 	g->burn = ft_strcpy(g->burn, "Burn");
 	if (ft_strcmp(g->mand, fr_str) == 0)
-	{	
 		g->fr_num = 1;
+	else if (ft_strcmp(g->jul, fr_str) == 0)
+		g->fr_num = 2;
+	else if (ft_strcmp(g->burn, fr_str) == 0)
+		g->fr_num = 3;
+	else
+		return (0);
+	fractol_setup(g);
+	//printf("movex = %f, movey = %f, zoom = %f\n", g->f.moX, g->f.moY, g->f.zoom);
+	return (1);
+}
+
+void	fractol_setup(t_general *g)
+{
+	g->f.moY = 0;
+	if (g->fr_num == 1)
+	{
 		g->size_x = 2000;
 		g->size_y = 1400;
 		g->f.zoom = 0.8;
 		g->f.moX = -0.7;
-		g->f.moY = 0;
 	}
-	else if (ft_strcmp(g->jul, fr_str) == 0)
+	else if (g->fr_num == 2)
 	{
-		g->fr_num = 2;
 		g->size_x = 1000;
 		g->size_y = 1000;
 		g->f.zoom = 1;
 		g->f.moX = 0;
-		g->f.moY = 0;
 	}
-	else if (ft_strcmp(g->burn, fr_str) == 0)
+	else if (g->fr_num == 3)
 	{
-		g->fr_num = 3;
 		g->size_x = 1000;
 		g->size_y = 1000;
-		g->f.zoom = 1;
-		g->f.moX = 0;
-		g->f.moY = 0;
+		g->f.zoom = 13;
+		g->f.moX = -1.7;
+		g->f.moY = 0.447911;
 	}
 	else
-		return (0);
-	//printf("movex = %f, movey = %f, zoom = %f\n", g->f.moX, g->f.moY, g->f.zoom);
-	return (1);
+		return ;
 }

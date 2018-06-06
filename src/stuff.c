@@ -53,4 +53,4 @@ int		ft_zoom(int mouse_but, int x, int y, t_general *g)
 	printf("x = %d, y = %d, movex = %f, movey = %f, zoom = %f\n", x, y, (g->mouse_x - g->size_x / 2) / 1000, g->f.moY, g->f.zoom);
 	ft_screen_stuff(g);
 	return (0);
-}
+}g
